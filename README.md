@@ -4,7 +4,8 @@ This application can manage and record fitness progress. The coach can create va
 
 
 ## Users: 
-Traniee and Coach. Each user can register as either a trainee or a coach, users can log in, log out, and create new accounts.
+Traniee and Coach. Each user can register as either a trainee or a coach. \
+Users can log in, log out, and create new accounts.
 
 ## Key Features:
 ● Traniee can view the list of fitness activities and its detailed information.(course description and time)\
