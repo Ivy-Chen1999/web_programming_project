@@ -6,7 +6,7 @@ Traniee and Coach. Each user can register as either a trainee or a coach. \
 Users can log in, log out, and create new accounts.
 
 ## Key Features:
-● Traniee can view the list of fitness activities and its detailed information.(course description and time)
+● Traniee can view the list of fitness activities and its detailed information(course description and time).
 
 ● Traniee can join fitness activities and log her/his completed trainings.
 
