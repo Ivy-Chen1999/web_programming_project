@@ -1,8 +1,6 @@
 # Fitness application
 
-This application can manage and record fitness progress. The coach can create various workout activities.
-
-
+This application can manage and record fitness progress for Fitness enthusiasts。
 ## Users: 
 Traniee and Coach. Each user can register as either a trainee or a coach. \
 Users can log in, log out, and create new accounts.
