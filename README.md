@@ -12,8 +12,8 @@ Traniee and Coach. Each user can register as either a trainee or a coach, users 
 ● Traniee can see the statistics of her/his progress and the feedbacks from the coaches.\
 ● Traniee can give an comment of the fitness activity and read reviews from others.\
 ● Coach can set up, modify and delete fitness activities, giving guides and instructions on the activity. \
-● Coach can see the statistics of traniee's participation and each traniee's completed trainings.
-● Coach can give personalized feedback based on the traniee's progress or technique\
+● Coach can see the statistics of traniee's participation and each traniee's completed trainings.\
+● Coach can give personalized feedback based on the traniee's progress or technique.
 
 
 
