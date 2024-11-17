@@ -22,7 +22,8 @@ Users can log in, log out, and create new accounts.
 
 
 ## Current Function & How to Test:  
-please use the following modules in requirements.txt
+please use the following modules in requirements.txt  
+
 ● User Management: Registration / Login / Logout\
   Test:  
   Register as Coach / Trainee by choosing the roles, then login, and click the logout link;
