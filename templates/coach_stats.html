@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Coach Stats{% endblock %}
+{% block content %}
+    <h1>Coach Statistics</h1>
+
+    <h2>Your Activities Summary</h2>
+    <ul>
+        <li>Total Activities Created: {{ stats|length }}</li> <!-- 使用 stats 的长度表示活动总数 -->
+    </ul>
+
+    <h2>Your Activities</h2>
+    <ul>
+        {% for activity in stats %}
+            <li>
+                <strong>{{ activity.activity_name }}</strong><br>
+                Total Participants: {{ activity.total_participants }}<br>
+                Completed Count: {{ activity.completed_count }}<br>
+                Completion Rate: {{ activity.completion_rate|float|round(2) }}%<br>
+                Average Rating: {{ activity.average_rating|float|round(2) }}
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}

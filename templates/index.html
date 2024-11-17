@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <h1>Welcome To All Activities</h1>
+    {% if user_role == 2 %}
+        <a href="/add">Add New Activity</a>
+        <a href="/remove">Remove Activity</a>
+    {% endif %}
+    <ul>
+        {% for activity in activities %}
+            <li>
+                <a href="/activity/{{ activity.id }}">{{ activity.name }}</a>
+                <br>
+                <span>Time: {{ activity.time }}</span>
+                <br>
+                <span>Coach: {{ activity.coach_name }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+
+    
+    
+{% endblock %}

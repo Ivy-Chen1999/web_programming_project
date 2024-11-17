@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Trainee Stats{% endblock %}
+{% block content %}
+    <h1>Your Stats</h1>
+    <h2>Summary</h2>
+    <ul>
+        <li>Total Activities Joined: {{ summary.total_courses }}</li>
+        <li>Completed Activities: {{ summary.completed_courses }}</li>
+        <li>Completion Rate: {{ summary.completion_rate|float|round(2) }}%</li>
+    </ul>
+
+    <h2>Your Participation</h2>
+    <ul>
+        {% for activity in participation %}
+            <li>
+                {{ activity.activity_name }} - 
+                {{ "Completed" if activity.completed else "In Progress" }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
