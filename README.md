@@ -21,7 +21,8 @@ Users can log in, log out, and create new accounts.
 ● Coach can give personalized feedback based on the traniee's technique.
 
 
-## Current Function & How to Test:
+## Current Function & How to Test:  
+please use the following modules in requirements.txt
 ● User Management: Registration / Login / Logout\
   Test:  
   Register as Coach / Trainee by choosing the roles, then login, and click the logout link;
