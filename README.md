@@ -22,21 +22,25 @@ Users can log in, log out, and create new accounts.
 
 
 ## Current Function & How to Test:
-● User Management: Registration / Login / Logout
-  Test: Register as Coach / Trainee by choosing the roles, then login, and click the logout link;
+● User Management: Registration / Login / Logout\
+  Test:  
+  Register as Coach / Trainee by choosing the roles, then login, and click the logout link;
 
-● Activity Management: Add / Remove course (for coach); Join Activity / Mark Completion (for trainee)
-  Test: If you are a Coach, you can Add course(name, description, start time) or remove the course created by yourself.
-        If you are a Trainee, you can click the course link and Join the course and marked it as completed.
+● Activity Management: Add / Remove course (for coach); Join Activity / Mark Completion (for trainee)  
+Test:  
+  If you are a Coach, you can Add course(name, description, start time) or remove the course created by yourself.\
+  If you are a Trainee, you can click the course link and Join the course and marked it as completed.
 
-● Activity Details: Course information / Participants; Provide Feedback(for coach) / Add Reviews and See Feedbacks(for  trainee) 
-  Test: If you are a Coach, you can provide a feedback for a specific trainee if they enrolled in the activity. 
-        If you are a Trainee, you can rate the activity and add reviews, and see feedback from the coach.
+● Activity Details: Course information / Participants; Provide Feedback(for coach) / Add Reviews and See Feedbacks(for trainee)  
+  Test:  
+  If you are a Coach, you can provide a feedback for a specific trainee if they enrolled in the activity.
+  If you are a Trainee, you can rate the activity and add reviews, and see feedback from the coach.
 
-● Statistics: Trainee Stats / Coach Stats
-  Test: If you are a Coach, you can click the stats link on the homepage and see Total participants / Completion rates /
-Average ratings of the courses you provide.
-        If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
+● Statistics: Trainee Stats / Coach Stats  
+  Test:  
+  If you are a Coach, you can click the stats link on the homepage and see Total participants / Completion rates /
+Average ratings of the courses you provide.\
+  If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
 
 
 
