@@ -44,7 +44,8 @@ Test:
 Average ratings of the courses you provide.\
   If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
 
-
+## Current Update
+● 
 
 ## Future Work:
 ● Improve the role-based control for Coaches 
@@ -54,6 +55,7 @@ Average ratings of the courses you provide.\
 ● Utilize pylint to polish the code
 
 ● Add CSS and Bootstrap for UI
+
 
 
 
