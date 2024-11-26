@@ -1,5 +1,6 @@
 from app import app
 from flask import render_template, request, redirect,flash
+from datetime import datetime
 import activity
 import stats
 import users
@@ -16,7 +17,8 @@ def add_activity():
     users.require_role(2)
 
     if request.method == "GET":
-        return render_template("add_activity.html")
+        current_time = datetime.now().strftime("%Y-%m-%dT%H:%M")
+        return render_template("add_activity.html", current_time = current_time)
     
     if request.method == "POST":
         users.check_csrf()
