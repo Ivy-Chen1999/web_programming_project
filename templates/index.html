@@ -18,6 +18,10 @@
         {% endfor %}
     </ul>
 
+    {% if not activities %}
+        <p>No upcoming activities available at the moment.</p>
+    {% endif %}
+
     
     
 {% endblock %}

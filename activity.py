@@ -7,7 +7,7 @@ def get_all_activities():
              FROM activities a
              LEFT JOIN users u ON a.coach_id = u.id
              WHERE a.coach_id IS NOT NULL 
-             ORDER BY a.time""")
+             ORDER BY a.time DESC""")
     return db.session.execute(sql).fetchall()
 
 def get_activity_info(activity_id): 

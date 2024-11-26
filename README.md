@@ -45,7 +45,9 @@ Average ratings of the courses you provide.\
   If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
 
 ## Current Update
-● 
+● Don't allow adding activities start in the past
+● Place upcoming events on the top 
+
 
 ## Future Work:
 ● Improve the role-based control for Coaches 
