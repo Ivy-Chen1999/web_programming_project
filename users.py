@@ -3,6 +3,7 @@ from db import db
 from flask import abort, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy import text
+from sqlalchemy.exc import IntegrityError
 
 def login(name, password):
     sql = text("SELECT password, id, role FROM users WHERE name=:name")
@@ -32,9 +33,13 @@ def register(name, password, role):
                  VALUES (:name, :password, :role)""")
         db.session.execute(sql, {"name": name, "password": hash_value, "role": role})
         db.session.commit()
-    except:
+        return login(name, password)
+    except IntegrityError:
+        return "duplicate"
+    except Exception: 
         return False
-    return login(name, password)
+    
+    
 
 def user_id():
     return session.get("user_id", 0)
