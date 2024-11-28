@@ -25,7 +25,6 @@
         </nav>
     </header>
     <main>
-        <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
                 <div id="flash-messages">
@@ -36,9 +35,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-        {% endwith %}
-        
-        <!-- Page Content -->
+        {% endwith %}       
         {% block content %}{% endblock %}
     </main>
     
@@ -48,7 +45,7 @@
             if (flashMessages) {
                 flashMessages.style.display = 'none';
             }
-        }, 3000); // Automatically hide after 3 seconds
+        }, 3000); 
     </script>
 </body>
 </html>
