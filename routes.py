@@ -198,8 +198,8 @@ def register():
         if password1 != password2:
             flash("Passwords do not match")
             return redirect(request.referrer)
-        if password1 == "":
-            flash("Password cannot be null")
+        if len(password1) < 1 or len(password1)>30:
+            flash("Password should be 2-30 characters.")
             return redirect(request.referrer)
 
 
@@ -207,13 +207,17 @@ def register():
         if role not in ("1", "2"):
             flash("Invalid role")
             return redirect(request.referrer)
-
-        if not users.register(username, password1, role):
+        
+        result = users.register(username, password1, role)
+        if result == "duplicate":
+            flash("Username already exists.")
+            return redirect(request.referrer)
+        elif not result:
             flash("Registration failed, please try again")
             return redirect(request.referrer)
         
-        flash("Registration successful!", "success")
-        return redirect("/login")
+        flash("Registration successful!You are now logged in.", "success")
+        return redirect("/")
     
 
 @app.errorhandler(ValueError)
