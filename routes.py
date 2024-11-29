@@ -10,7 +10,7 @@ import users
 def index():
     logged_in = users.is_logged_in() 
     user_role = users.user_role() if logged_in else 0
-    return render_template("index.html", activities=activity.get_all_activities(),logged_in=logged_in,user_role=user_role)
+    return render_template("index.html", activities=activity.get_all_activities(),user_role=user_role)
 
 @app.route("/add", methods=["GET", "POST"])
 def add_activity():
