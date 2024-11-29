@@ -28,6 +28,7 @@ CREATE TABLE trainee_reviews (
     activity_id INTEGER REFERENCES activities(id) ON DELETE CASCADE,
     stars INTEGER CHECK (stars BETWEEN 1 AND 5),
     comment TEXT
+    CONSTRAINT unique_review_per_trainee UNIQUE (activity_id, trainee_id)
 );
 
 CREATE TABLE coach_feedback (

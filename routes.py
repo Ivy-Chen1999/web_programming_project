@@ -115,8 +115,11 @@ def add_review():
         flash("Review comment is too long")
         return redirect(request.referrer)
 
-    activity.add_review(activity_id, users.user_id(), stars, comment)
-    flash("Review added successfully!", "success")
+    try:
+        activity.add_review(activity_id, users.user_id(), stars, comment)
+        flash("Review added successfully!", "success")
+    except ValueError:
+        flash("You have already reviewed this activity.")
     return redirect(f"/activity/{activity_id}")
 
 @app.route("/feedback", methods=["POST"])

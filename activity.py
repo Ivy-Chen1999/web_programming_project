@@ -1,6 +1,7 @@
 from random import randint
 from db import db
 from sqlalchemy import text
+from sqlalchemy.exc import IntegrityError
 
 def get_all_activities():
     sql = text("""SELECT a.id, a.name, a.time, u.name AS coach_name
@@ -43,7 +44,7 @@ def remove_activity(activity_id, coach_id):
     result = db.session.execute(sql, {"activity_id": activity_id, "coach_id": coach_id})
     db.session.commit()
     if not result:
-        raise ValueError("Activity not found or permission denied.")
+        raise ValueError
     
 def join_activity(activity_id, trainee_id):
     check_activity_exists(activity_id)
@@ -94,15 +95,18 @@ def add_review(activity_id, trainee_id, stars, comment):
     if not check_participation(activity_id, trainee_id):
         raise ValueError("You can only review activities you participated in.")
 
-    sql = text("""INSERT INTO trainee_reviews (activity_id, trainee_id, stars, comment)
-             VALUES (:activity_id, :trainee_id, :stars, :comment)""")
-    db.session.execute(sql, {
-        "activity_id": activity_id,
-        "trainee_id": trainee_id,
-        "stars": stars,
-        "comment": comment
-    })
-    db.session.commit()
+    try:
+        sql = text("""INSERT INTO trainee_reviews (activity_id, trainee_id, stars, comment)
+                VALUES (:activity_id, :trainee_id, :stars, :comment)""")
+        db.session.execute(sql, {
+            "activity_id": activity_id,
+            "trainee_id": trainee_id,
+            "stars": stars,
+            "comment": comment
+        })
+        db.session.commit()
+    except IntegrityError:
+        raise ValueError
 
 def get_reviews(activity_id): 
     sql = text("""SELECT u.name AS trainee_name, r.stars, r.comment
