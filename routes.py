@@ -79,12 +79,11 @@ def join_activity():
     users.check_csrf()
 
     activity_id = request.form["activity_id"]
-    if not activity_id or not activity.join_activity(activity_id, users.user_id()):
+    if not activity.join_activity(activity_id, users.user_id()):
         flash("You may already joined this activity.", "error")
         return redirect(request.referrer)
     
     flash("Successfully joined the activity!", "success")
-
     return redirect(f"/activity/{activity_id}") 
 
 
@@ -135,6 +134,9 @@ def add_feedback():
 
     if not activity_id or not trainee_id or not feedback:
         flash("All fields are required.", "error")
+        return redirect(request.referrer)
+    if len(feedback) < 1 or len(feedback) > 1000:
+        flash("Feedback must be between 1-1000 characters.", "error")
         return redirect(request.referrer)
     
     coach_id = users.user_id()

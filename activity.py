@@ -53,6 +53,7 @@ def join_activity(activity_id, trainee_id):
              VALUES (:trainee_id, :activity_id, NOW(), FALSE)""")
     db.session.execute(sql, {"trainee_id": trainee_id, "activity_id": activity_id})
     db.session.commit()
+    return True
     
 
 def get_participation(activity_id): 
