@@ -166,6 +166,9 @@ def coach_stats():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if users.is_logged_in():
+        flash("You already logged in.","message")
+        return redirect("/")
     if request.method == "GET":
         return render_template("login.html")
 
@@ -188,6 +191,9 @@ def logout():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if users.is_logged_in():
+        flash("You already logged in.","message")
+        return redirect("/")
     if request.method == "GET":
         return render_template("register.html")
 
