@@ -67,11 +67,14 @@ def show_activity(activity_id):
     reviews = activity.get_reviews(activity_id)
 
     feedback = None
+    can_feedback = False
     if users.user_role() == 1:  
         feedback = activity.get_my_feedback(activity_id, users.user_id()) 
-
+    coach_id = users.user_id()
+    if users.user_role() == 2:
+        can_feedback = activity.check_coach_permission(activity_id, coach_id)
     return render_template("activity.html", info=info, participation=participation, \
-                           reviews=reviews,feedback=feedback)
+                           reviews=reviews,feedback=feedback,can_feedback = can_feedback)
 
 @app.route("/join", methods=["POST"])
 def join_activity():

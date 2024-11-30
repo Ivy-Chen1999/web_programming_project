@@ -60,16 +60,16 @@
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="hidden" name="activity_id" value="{{ info.id }}">
             <label for="trainee_id">Trainee:</label>
-            <select id="trainee_id" name="trainee_id" required>
+            <select id="trainee_id" name="trainee_id" {% if not can_feedback %}disabled{% endif %} required>
                 {% for participant in participation %}
                     <option value="{{ participant.id }}">{{ participant.name }}</option>
                 {% endfor %}
             </select>
             <br>
             <label for="feedback">Feedback:</label>
-            <textarea id="feedback" name="feedback" minlength="1" maxlength="1000" required></textarea>
+            <textarea id="feedback" name="feedback" minlength="1" maxlength="1000" {% if not can_feedback %}disabled{% endif %} required></textarea>
             <br>
-            <button type="submit">Submit Feedback</button>
+            <button type="submit" {% if not can_feedback %}disabled{% endif %} >Submit Feedback</button>
         </form>
     {% endif %}
 
