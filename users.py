@@ -53,7 +53,7 @@ def is_logged_in():
 
 
 def require_role(role):
-    if role > session.get("user_role", 0):
+    if session.get("user_role", 0) != role:
         abort(403, description="You do not have sufficient permissions.")
 
 def check_csrf():
