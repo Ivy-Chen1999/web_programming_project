@@ -45,18 +45,19 @@ Average ratings of the courses you provide.\
   If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
 
 ## Current Update
-● Don't allow adding activities start in the past
-● Place upcoming events on the top 
+● Prevent adding activities with a start time in the past.
+● Display upcoming events at the top.
+● Add constraints for repeating usernames, password length, feedback and comment length.
+● Enable automatic login after registration and redirect to the homepage.
+● Allow trainees to submit only one review.
+● Standardize error messages and validation functions.
+● Prevent access to the login and registration pages after the user is already logged in.
+● Add CSS templates to enhance the interface.
 
 
 ## Future Work:
-● Improve the role-based control for Coaches 
-
-● Refine the error message and user interaction
-
 ● Utilize pylint to polish the code
-
-● Add CSS and Bootstrap for UI
+● Maybe use Bootstrap for better UI
 
 
 

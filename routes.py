@@ -83,7 +83,7 @@ def join_activity():
 
     activity_id = request.form["activity_id"]
     if not activity.join_activity(activity_id, users.user_id()):
-        flash("You may already joined this activity.", "error")
+        flash("You may already joined this activity.", "message")
         return redirect(request.referrer)
     
     flash("Successfully joined the activity!", "success")
@@ -120,7 +120,7 @@ def add_review():
         return redirect(request.referrer)
 
     if not activity.add_review(activity_id, users.user_id(), stars, comment):
-        flash("Failed to add review. Ensure you participated in the activity or haven't reviewed already.", "message")
+        flash("Failed to add review. Ensure you participated in the activity or haven't reviewed already.", "error")
         return redirect(request.referrer)
     
     flash("Review added successfully!", "success")
@@ -139,12 +139,12 @@ def add_feedback():
         flash("All fields are required.", "error")
         return redirect(request.referrer)
     if len(feedback) < 1 or len(feedback) > 1000:
-        flash("Feedback must be between 1-1000 characters.", "error")
+        flash("Feedback must be between 1-1000 characters.", "message")
         return redirect(request.referrer)
     
     coach_id = users.user_id()
     if not activity.add_feedback(activity_id, coach_id, trainee_id, feedback):
-        flash("Failed to add feedback. Make sure you have permission", "message")
+        flash("Failed to add feedback. Make sure you have permission", "error")
         return redirect(request.referrer)
     flash("Feedback added successfully!", "success")
     return redirect(f"/activity/{activity_id}")
