@@ -1,6 +1,6 @@
-from app import app
-from flask import render_template, request, redirect,flash
 from datetime import datetime
+from flask import render_template, request, redirect,flash
+from app import app
 import activity
 import stats
 import users
@@ -8,7 +8,7 @@ import users
 
 @app.route("/")
 def index():
-    logged_in = users.is_logged_in() 
+    logged_in = users.is_logged_in()
     user_role = users.user_role() if logged_in else 0
     return render_template("index.html", activities=activity.get_all_activities(),user_role=user_role)
 
@@ -19,7 +19,6 @@ def add_activity():
     if request.method == "GET":
         current_time = datetime.now().strftime("%Y-%m-%dT%H:%M")
         return render_template("add_activity.html", current_time = current_time)
-    
     if request.method == "POST":
         users.check_csrf()
         name = request.form["name"]
@@ -33,7 +32,8 @@ def add_activity():
         activity.add_activity(name, description, time, coach_id)
         flash("Course added successfully!", "success")
         return redirect("/")
-    
+    return "Method Not Allowed", 405
+
 @app.route("/remove", methods=["GET", "POST"])
 def remove_activity():
     users.require_role(2)
@@ -45,14 +45,12 @@ def remove_activity():
         users.check_csrf()
 
         activity_id = request.form["activity_id"]
-            
         if not activity.remove_activity(activity_id, users.user_id()):
             flash("Failed to remove activity. It may not exist or you don't have permission.", "error")
-            return redirect(request.referrer)     
+            return redirect(request.referrer)
         flash("Course successfully deleted!", "success")
-            
         return redirect("/")
-    
+    return "Method Not Allowed", 405
 
 @app.route("/activity/<int:activity_id>")
 def show_activity(activity_id):
@@ -68,8 +66,8 @@ def show_activity(activity_id):
 
     feedback = None
     can_feedback = False
-    if users.user_role() == 1:  
-        feedback = activity.get_my_feedback(activity_id, users.user_id()) 
+    if users.user_role() == 1:
+        feedback = activity.get_my_feedback(activity_id, users.user_id())
     coach_id = users.user_id()
     if users.user_role() == 2:
         can_feedback = activity.check_coach_permission(activity_id, coach_id)
@@ -78,17 +76,16 @@ def show_activity(activity_id):
 
 @app.route("/join", methods=["POST"])
 def join_activity():
-    users.require_role(1)  
+    users.require_role(1)
     users.check_csrf()
 
     activity_id = request.form["activity_id"]
     if not activity.join_activity(activity_id, users.user_id()):
         flash("You may already joined this activity.", "message")
         return redirect(request.referrer)
-    
-    flash("Successfully joined the activity!", "success")
-    return redirect(f"/activity/{activity_id}") 
 
+    flash("Successfully joined the activity!", "success")
+    return redirect(f"/activity/{activity_id}")
 
 @app.route("/complete", methods=["POST"])
 def mark_as_completed():
@@ -122,14 +119,14 @@ def add_review():
     if not activity.add_review(activity_id, users.user_id(), stars, comment):
         flash("Failed to add review. Ensure you participated in the activity or haven't reviewed already.", "error")
         return redirect(request.referrer)
-    
+
     flash("Review added successfully!", "success")
     return redirect(f"/activity/{activity_id}")
 
 @app.route("/feedback", methods=["POST"])
 def add_feedback():
-    users.require_role(2) 
-    users.check_csrf()  
+    users.require_role(2)
+    users.check_csrf()
 
     activity_id = request.form["activity_id"]
     trainee_id = request.form["trainee_id"]
@@ -141,7 +138,7 @@ def add_feedback():
     if len(feedback) < 1 or len(feedback) > 1000:
         flash("Feedback must be between 1-1000 characters.", "message")
         return redirect(request.referrer)
-    
+
     coach_id = users.user_id()
     if not activity.add_feedback(activity_id, coach_id, trainee_id, feedback):
         flash("Failed to add feedback. Make sure you have permission", "error")
@@ -155,10 +152,9 @@ def trainee_stats():
     users.require_role(1)
     trainee_id = users.user_id()
     stats_data = stats.get_trainee_stats(trainee_id)
-    return render_template("trainee_stats.html", 
-                           summary=stats_data["summary"], 
+    return render_template("trainee_stats.html",
+                           summary=stats_data["summary"],
                            participation=stats_data["details"],hide_login_register=True)
-
 
 @app.route("/stats/coach")
 def coach_stats():
@@ -182,10 +178,11 @@ def login():
         if not users.login(username, password):
             flash("Wrong username or password","error")
             return redirect(request.referrer)
-        
+
         flash("Login successful!", "success")
         return redirect("/")
-    
+    return "Method Not Allowed", 405
+
 @app.route("/logout", methods=["GET"])
 def logout():
     users.logout()
@@ -220,16 +217,15 @@ def register():
         if role not in ("1", "2"):
             flash("Invalid role","error")
             return redirect(request.referrer)
-        
+
         result = users.register(username, password1, role)
         if result == "duplicate":
             flash("Username already exists.","error")
             return redirect(request.referrer)
-        elif not result:
+        if not result:
             flash("Registration failed, please try again","error")
             return redirect(request.referrer)
-        
+
         flash("Registration successful!You are now logged in.", "success")
         return redirect("/")
-    
-
+    return "Method Not Allowed", 405

@@ -1,5 +1,3 @@
-"""Back-end Module for managing activities."""
-
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 from db import db
