@@ -23,9 +23,12 @@ def add_activity():
         users.check_csrf()
         name = request.form["name"]
         if len(name) < 1 or len(name) > 50:
-            flash("Course name should be 1-50 characters","message")
+            flash("Course name should be 1-50 characters.","message")
             return redirect(request.referrer)
         description = request.form["description"]
+        if len(description) < 1 or len(description) > 200:
+            flash("Description should be 1-200 characters.","message")
+            return redirect(request.referrer)
         time = request.form["time"]
 
         coach_id = users.user_id()
@@ -81,7 +84,7 @@ def join_activity():
 
     activity_id = request.form["activity_id"]
     if not activity.join_activity(activity_id, users.user_id()):
-        flash("You may already joined this activity.", "message")
+        flash("You already joined this activity.", "message")
         return redirect(request.referrer)
 
     flash("Successfully joined the activity!", "success")
@@ -108,12 +111,12 @@ def add_review():
 
     stars = int(request.form["stars"])
     if not 1 <= stars <= 5:
-        flash("Invalid rating. Please enter a number between 1 and 5", "error")
+        flash("Invalid rating. Please enter a number between 1 and 5.", "error")
         return redirect(request.referrer)
 
     comment = request.form["comment"]
     if len(comment) > 1000:
-        flash("Review comment is too long","error")
+        flash("Review comment is too long.","error")
         return redirect(request.referrer)
 
     if not activity.add_review(activity_id, users.user_id(), stars, comment):
@@ -141,7 +144,7 @@ def add_feedback():
 
     coach_id = users.user_id()
     if not activity.add_feedback(activity_id, coach_id, trainee_id, feedback):
-        flash("Failed to add feedback. Make sure you have permission", "error")
+        flash("Failed to add feedback. Make sure you have permission.", "error")
         return redirect(request.referrer)
     flash("Feedback added successfully!", "success")
     return redirect(f"/activity/{activity_id}")
@@ -176,7 +179,7 @@ def login():
         password = request.form["password"]
 
         if not users.login(username, password):
-            flash("Wrong username or password","error")
+            flash("Wrong username or password.","error")
             return redirect(request.referrer)
 
         flash("Login successful!", "success")
@@ -200,13 +203,13 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         if len(username) < 1 or len(username) > 20:
-            flash("Username should be 1-20 characters","error")
+            flash("Username should be 1-20 characters.","error")
             return redirect(request.referrer)
 
         password1 = request.form["password1"]
         password2 = request.form["password2"]
         if password1 != password2:
-            flash("Passwords do not match","error")
+            flash("Passwords do not match.","error")
             return redirect(request.referrer)
         if len(password1) < 1 or len(password1)>30:
             flash("Password should be 2-30 characters.","error")
@@ -215,7 +218,7 @@ def register():
 
         role = request.form["role"]
         if role not in ("1", "2"):
-            flash("Invalid role","error")
+            flash("Invalid role!","error")
             return redirect(request.referrer)
 
         result = users.register(username, password1, role)
@@ -223,7 +226,7 @@ def register():
             flash("Username already exists.","error")
             return redirect(request.referrer)
         if not result:
-            flash("Registration failed, please try again","error")
+            flash("Registration failed, please try again.","error")
             return redirect(request.referrer)
 
         flash("Registration successful!You are now logged in.", "success")
