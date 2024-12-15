@@ -1,9 +1,14 @@
 # Fitness application
 
-This application can manage and record fitness progress for Fitness enthusiasts.
+This application is designed to help fitness enthusiasts manage and track their fitness progress.\
+Users can engage in a variety of fitness activities, log their progress, and receive feedback from coaches.
+
 ## Users: 
-Traniee and Coach. Each user can register as either a trainee or a coach. \
-Users can log in, log out, and create new accounts.
+
+The application supports two user roles:\
+Trainee: Individuals who participate in fitness activities.\
+Coach: Professionals who organize and manage activities and provide guidance.
+
 
 ## Key Features:
 ● Traniee can view the list of fitness activities and its detailed information(course name,description and time).
@@ -16,27 +21,26 @@ Users can log in, log out, and create new accounts.
 
 ● Coach can manage (view,set up, modify and delete) fitness activities, giving guides and instructions on the activity. 
 
-● Coach can see the statistics of traniee's participation and each traniee's completed trainings.
+● Coach can view the statistics of traniee's participation and summary of the courses offered by her/himself.
 
 ● Coach can give personalized feedback based on the traniee's technique.
 
 
-## Current Function & How to Test:  
-please use the following modules in requirements.txt  
+## Current Functionalities & How to Test:   
 
 ● User Management: Registration / Login / Logout\
   Test:  
-  Register as Coach / Trainee by choosing the roles, then login, and click the logout link;
+  Register as Coach / Trainee by choosing the roles, then login automatically, and click the logout link;
 
 ● Activity Management: Add / Remove course (for coach); Join Activity / Mark Completion (for trainee)  
-Test:  
+  Test:  
   If you are a Coach, you can Add course(name, description, start time) or remove the course created by yourself.\
   If you are a Trainee, you can click the course link and Join the course and marked it as completed.
 
 ● Activity Details: Course information / Participants; Provide Feedback(for coach) / Add Reviews and See Feedbacks(for trainee)  
   Test:  
   If you are a Coach, you can provide a feedback for a specific trainee if they enrolled in the activity.
-  If you are a Trainee, you can rate the activity and add reviews, and see feedback from the coach.
+  If you are a Trainee, you can rate the activity and add reviews after joined the activity, and recieve feedback from the coach.
 
 ● Statistics: Trainee Stats / Coach Stats  
   Test:  
@@ -44,7 +48,9 @@ Test:
 Average ratings of the courses you provide.\
   If you are a Trainee, you can view the process of your fitness activity(number of activities joined and completion rate)
 
-## Current Update
+
+
+## Recent Updates
 ● Prevent adding activities with a start time in the past. 
 
 ● Display upcoming events at the top. 
@@ -61,11 +67,35 @@ Average ratings of the courses you provide.\
 
 ● Add CSS templates to enhance the interface.
 
-
-## Future Work:
 ● Utilize pylint to polish the code 
 
-● Maybe use Bootstrap for better UI
+
+## Local Deployment
+
+● Set Up Environment Variables，Create a .env file in the root folder and specify its content:
+
+```
+DATABASE_URL=<your-local-database-url>
+SECRET_KEY=<your-secret-key>
+```
+● Activate a virtual environment and install the required modules:
+```
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
+● Set Up the Database：
+```
+$ psql < schema.sql
+```
+● Run the Application：
+```
+$ flask run
+```
+
+
+
+
 
 
 
