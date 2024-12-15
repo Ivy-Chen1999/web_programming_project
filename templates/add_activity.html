@@ -8,11 +8,11 @@
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         
         <label for="name">Course Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" minlength="1" maxlength="50" required>
         <br>
         
         <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
+        <textarea id="description" name="description" minlength="1" maxlength="200" required></textarea>
         <br>
         
         <label for="time">Start Time:</label>
